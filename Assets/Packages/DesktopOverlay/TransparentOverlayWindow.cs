@@ -17,6 +17,7 @@ public class TransparentOverlayWindow : SingletonMonoBehaviour<TransparentOverla
 
 #if UNITY_STANDALONE_WIN
     [DllImport("user32.dll")] private static extern IntPtr GetActiveWindow();
+    [DllImport("user32.dll")] private static extern IntPtr GetForegroundWindow();
     [DllImport("user32.dll")] private static extern IntPtr FindWindow(string cls, string title);
 
     [DllImport("user32.dll")]
@@ -85,7 +86,11 @@ public class TransparentOverlayWindow : SingletonMonoBehaviour<TransparentOverla
 #if UNITY_STANDALONE_WIN
     private void SetupNativeWindow()
     {
+        // Try GetActiveWindow first (reliable when called early in Start/Awake),
+        // fall back to GetForegroundWindow, and finally search by product name.
         IntPtr hWnd = GetActiveWindow();
+        if (hWnd == IntPtr.Zero)
+            hWnd = GetForegroundWindow();
         if (hWnd == IntPtr.Zero)
             hWnd = FindWindow(null, Application.productName);
 

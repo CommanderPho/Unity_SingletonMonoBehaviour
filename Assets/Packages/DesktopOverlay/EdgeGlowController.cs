@@ -137,7 +137,10 @@ public class EdgeGlowController : SingletonMonoBehaviour<EdgeGlowController>
         mat.SetColor("_Color",     glowColor);
         mat.SetFloat("_Intensity", glowIntensity);
         mat.SetFloat("_Alpha",     0f);
-        go.GetComponent<MeshRenderer>().sharedMaterial = mat;
+        // Assign via .material (not .sharedMaterial) so Unity stores a proper
+        // per-renderer instance.  MonitorEdgeGlow then reads .sharedMaterial to
+        // access that same instance without triggering a second copy.
+        go.GetComponent<MeshRenderer>().material = mat;
 
         var glow = go.AddComponent<MonitorEdgeGlow>();
         glow.GlowDuration = glowDuration;

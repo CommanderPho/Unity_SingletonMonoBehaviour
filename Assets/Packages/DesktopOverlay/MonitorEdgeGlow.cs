@@ -20,8 +20,10 @@ public class MonitorEdgeGlow : MonoBehaviour
 
     private void Awake()
     {
-        // Obtain the instance material so each quad has its own alpha value.
-        _material = GetComponent<MeshRenderer>().material;
+        // Read sharedMaterial — EdgeGlowController assigned a unique per-renderer
+        // instance via renderer.material, so sharedMaterial returns that same
+        // instance without creating yet another copy.
+        _material = GetComponent<MeshRenderer>().sharedMaterial;
     }
 
     private void OnDestroy()
