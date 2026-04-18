@@ -1,0 +1,20 @@
+{
+    "name"       : "com.commanderpho.desktop_overlay",
+    "displayName": "Desktop Overlay",
+    "version"    : "1.0.0",
+    "unity"      : "2021.3",
+    "description": "Transparent, always-on-top, click-through Windows 10 overlay with multi-monitor edge glow effects.",
+    "author"     :
+    {
+        "name": "CommanderPho",
+        "url" : "https://github.com/CommanderPho"
+    },
+    "keywords":
+    [
+        "overlay", "transparent", "desktop", "multi-monitor", "edge-glow"
+    ],
+    "dependencies":
+    {
+        "com.xjine.singleton_mono_behaviour": "1.0.0"
+    }
+}
